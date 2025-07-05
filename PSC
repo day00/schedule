@@ -1,0 +1,729 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pacific Science Museum Day Plan</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 15px;
+            position: relative;
+            overflow-x: hidden;
+        }
+        
+        /* Decorative elements */
+        .decoration {
+            position: absolute;
+            opacity: 0.08;
+            pointer-events: none;
+            z-index: 0;
+        }
+        
+        .rubiks-cube {
+            width: 30px;
+            height: 30px;
+            background: linear-gradient(45deg, #ff6b35, #f7931e, #ffd23f, #43aa8b);
+            border-radius: 4px;
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        .dino {
+            font-size: 25px;
+            animation: float 8s ease-in-out infinite reverse;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-15px) rotate(3deg); }
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.96);
+            border-radius: 15px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+            padding: 25px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 3px solid #667eea;
+        }
+        
+        .title {
+            font-size: 2.2em;
+            color: #333;
+            margin-bottom: 8px;
+        }
+        
+        .subtitle {
+            font-size: 1.1em;
+            color: #666;
+            font-style: italic;
+        }
+        
+        /* Quick Navigation */
+        .quick-nav {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+        
+        .nav-button {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 8px 15px;
+            border-radius: 20px;
+            text-decoration: none;
+            font-size: 0.9em;
+            font-weight: 500;
+            transition: transform 0.2s;
+            cursor: pointer;
+            border: none;
+        }
+        
+        .nav-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+        
+        .nav-button.alt {
+            background: linear-gradient(135deg, #ff6b35, #f7931e);
+        }
+        
+        /* Main Schedule Overview */
+        .schedule-overview {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 20px;
+            margin-bottom: 25px;
+            background: linear-gradient(135deg, #f8f9ff 0%, #e8f2ff 100%);
+            border-radius: 12px;
+            padding: 20px;
+            border: 2px solid #667eea;
+        }
+        
+        .main-schedule {
+            background: white;
+            border-radius: 10px;
+            padding: 15px;
+        }
+        
+        .schedule-title {
+            font-size: 1.3em;
+            color: #333;
+            margin-bottom: 10px;
+            text-align: center;
+            font-weight: 600;
+        }
+        
+        .late-start-note {
+            font-size: 0.8em;
+            color: #666;
+            text-align: center;
+            margin-bottom: 15px;
+            font-style: italic;
+        }
+        
+        .time-slot {
+            display: flex;
+            align-items: center;
+            margin-bottom: 8px;
+            padding: 8px;
+            border-radius: 6px;
+            border-left: 3px solid #667eea;
+        }
+        
+        .time-slot.breakfast {
+            background: linear-gradient(135deg, #fff3cd, #ffeaa7);
+            border-left-color: #ffc107;
+        }
+        
+        .time-slot.museum {
+            background: linear-gradient(135deg, #d1ecf1, #bee5eb);
+            border-left-color: #17a2b8;
+        }
+        
+        .time-slot.activities {
+            background: linear-gradient(135deg, #f8d7da, #f5c6cb);
+            border-left-color: #dc3545;
+        }
+        
+        .time-slot.lunch {
+            background: linear-gradient(135deg, #d4edda, #c3e6cb);
+            border-left-color: #28a745;
+        }
+        
+        .time-slot.return {
+            background: linear-gradient(135deg, #e2e3e5, #d6d8db);
+            border-left-color: #6c757d;
+        }
+        
+        .time-slot .time {
+            font-weight: 600;
+            color: #333;
+            min-width: 80px;
+            margin-right: 15px;
+        }
+        
+        .time-slot .activity {
+            color: #333;
+        }
+        
+        .tips-panel {
+            background: white;
+            border-radius: 10px;
+            padding: 15px;
+        }
+        
+        .tips-title {
+            font-size: 1.1em;
+            color: #333;
+            margin-bottom: 12px;
+            font-weight: 600;
+        }
+        
+        .tip-item {
+            margin-bottom: 8px;
+            font-size: 0.9em;
+            color: #555;
+            line-height: 1.3;
+        }
+        
+        .tip-item strong {
+            color: #667eea;
+        }
+        
+        .chihuly-section {
+            background: linear-gradient(135deg, #e8f5e8, #d4edda);
+            border: 2px solid #28a745;
+            border-radius: 10px;
+            padding: 12px;
+            margin-bottom: 15px;
+        }
+        
+        .chihuly-title {
+            font-weight: 600;
+            color: #155724;
+            margin-bottom: 6px;
+        }
+        
+        /* Detailed Sections */
+        .details-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+        
+        .detail-section {
+            border-radius: 10px;
+            padding: 15px;
+            border: 1px solid #e0e6ff;
+        }
+        
+        .detail-section.imax {
+            background: linear-gradient(135deg, #fff3cd, #ffeaa7);
+        }
+        
+        .detail-section.laser {
+            background: linear-gradient(135deg, #f8d7da, #f5c6cb);
+        }
+        
+        .detail-section.planetarium {
+            background: linear-gradient(135deg, #d1ecf1, #bee5eb);
+        }
+        
+        .section-header {
+            font-size: 1.1em;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 12px;
+            padding-bottom: 8px;
+            border-bottom: 2px solid #667eea;
+        }
+        
+        .show-item {
+            margin-bottom: 8px;
+            padding: 6px;
+            background: rgba(255, 255, 255, 0.7);
+            border-radius: 5px;
+            font-size: 0.9em;
+        }
+        
+        .show-name {
+            font-weight: 600;
+            color: #333;
+        }
+        
+        .show-time {
+            color: #667eea;
+            font-size: 0.85em;
+        }
+        
+        .show-note {
+            color: #666;
+            font-size: 0.8em;
+            font-style: italic;
+        }
+        
+        /* Exhibits Section */
+        .exhibits-section {
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+            border: 1px solid #e0e6ff;
+        }
+        
+        .building-group {
+            margin-bottom: 20px;
+            border-radius: 8px;
+            padding: 15px;
+        }
+        
+        .building-group.building1 {
+            background: linear-gradient(135deg, #fff3cd, #ffeaa7);
+        }
+        
+        .building-group.building2 {
+            background: linear-gradient(135deg, #d1ecf1, #bee5eb);
+        }
+        
+        .building-group.building3 {
+            background: linear-gradient(135deg, #f8d7da, #f5c6cb);
+        }
+        
+        .building-group.ackerley {
+            background: linear-gradient(135deg, #e8f5e8, #d4edda);
+        }
+        
+        .building-group.courtyard {
+            background: linear-gradient(135deg, #e2e3e5, #d6d8db);
+        }
+        
+        .building-title {
+            font-size: 1.2em;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 10px;
+        }
+        
+        .exhibits-mini-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 10px;
+        }
+        
+        .exhibit-card {
+            padding: 8px;
+            border-radius: 6px;
+            border: 1px solid rgba(255, 255, 255, 0.8);
+            background: rgba(255, 255, 255, 0.7);
+        }
+        
+        .exhibit-card.highlight {
+            background: linear-gradient(135deg, #ffd700, #ffed4e);
+            border-color: #ffc107;
+            font-weight: 600;
+        }
+        
+        .exhibit-card.preschool {
+            background: linear-gradient(135deg, #87ceeb, #add8e6);
+            border-color: #17a2b8;
+        }
+        
+        .exhibit-name {
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 4px;
+            font-size: 0.9em;
+        }
+        
+        .exhibit-desc {
+            font-size: 0.8em;
+            color: #666;
+            line-height: 1.2;
+        }
+        
+        /* Map Section */
+        .map-section {
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+            border: 2px solid #667eea;
+            text-align: center;
+        }
+        
+        .map-title {
+            font-size: 1.3em;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 15px;
+        }
+        
+        .map-placeholder {
+            background: linear-gradient(135deg, #f8f9ff, #e8f2ff);
+            border: 2px dashed #667eea;
+            border-radius: 8px;
+            padding: 40px;
+            color: #667eea;
+            font-size: 1.1em;
+            margin-bottom: 10px;
+        }
+        
+        /* Rubiks Schedule */
+        .rubiks-section {
+            background: linear-gradient(135deg, #ff6b35, #f7931e);
+            border-radius: 10px;
+            padding: 20px;
+            color: white;
+        }
+        
+        .rubiks-title {
+            font-size: 1.3em;
+            font-weight: 600;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+        
+        .rubiks-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 10px;
+        }
+        
+        .rubiks-event {
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 6px;
+            padding: 10px;
+            text-align: center;
+        }
+        
+        .event-name {
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+        
+        .event-time {
+            font-size: 0.9em;
+            opacity: 0.9;
+        }
+        
+        /* Important Notes */
+        .important-note {
+            background: linear-gradient(135deg, #dc3545, #c82333);
+            color: white;
+            padding: 12px;
+            border-radius: 8px;
+            text-align: center;
+            font-weight: 600;
+            margin: 15px 0;
+        }
+        
+        /* Scroll behavior */
+        html {
+            scroll-behavior: smooth;
+        }
+    </style>
+</head>
+<body>
+    <!-- Decorative elements -->
+    <div class="decoration rubiks-cube" style="top: 8%; left: 4%;"></div>
+    <div class="decoration rubiks-cube" style="top: 25%; right: 6%;"></div>
+    <div class="decoration rubiks-cube" style="bottom: 20%; left: 2%;"></div>
+    <div class="decoration rubiks-cube" style="bottom: 35%; right: 4%;"></div>
+    
+    <div class="decoration dino" style="top: 12%; left: 88%;">🦕</div>
+    <div class="decoration dino" style="top: 65%; left: 1%;">🦖</div>
+    <div class="decoration dino" style="bottom: 8%; right: 12%;">🦴</div>
+
+    <div class="container">
+        <div class="header">
+            <h1 class="title">🧪 Pacific Science Museum Day Plan 🚀</h1>
+            <p class="subtitle">Your At-A-Glance Adventure Guide</p>
+        </div>
+
+        <!-- Quick Navigation -->
+        <div class="quick-nav">
+            <button onclick="document.getElementById('map-section').scrollIntoView({behavior: 'smooth'})" class="nav-button">🗺️ View Map</button>
+            <button onclick="document.getElementById('imax-section').scrollIntoView({behavior: 'smooth'})" class="nav-button">🎬 IMAX Times</button>
+            <button onclick="document.getElementById('shows-section').scrollIntoView({behavior: 'smooth'})" class="nav-button">✨ All Shows</button>
+            <button onclick="document.getElementById('exhibits-section').scrollIntoView({behavior: 'smooth'})" class="nav-button">🎯 Exhibits</button>
+            <button onclick="document.getElementById('rubiks-section').scrollIntoView({behavior: 'smooth'})" class="nav-button alt">🧩 Rubik's Schedule</button>
+        </div>
+
+        <!-- Chihuly Garden Option -->
+        <div class="chihuly-section">
+            <div class="chihuly-title">🌿 Optional: Chihuly Garden & Glass (If Jon wants to visit)</div>
+            <div style="font-size: 0.9em; color: #155724;">
+                <strong>Two options:</strong> Early birds can visit before the museum (Garden opens 8:30 AM, Museum 10 AM) - just ensure time for a good breakfast! 
+                Alternatively, add it on after the museum if you finish early and have energy left. Only attempt if feeling ambitious!
+            </div>
+        </div>
+
+        <!-- Main Schedule Overview -->
+        <div class="schedule-overview">
+            <div class="main-schedule">
+                <h2 class="schedule-title">📅 Today's Schedule</h2>
+                <div class="late-start-note">Relaxed late start - Museum opens 10 AM</div>
+                
+                <div class="time-slot breakfast">
+                    <div class="time">10:00 AM</div>
+                    <div class="activity">🥞 Hearty Breakfast (Portage Cafe or nearby)</div>
+                </div>
+                <div class="time-slot museum">
+                    <div class="time">11:00 AM</div>
+                    <div class="activity">🏛️ Museum Entry & Explore</div>
+                </div>
+                <div class="time-slot museum">
+                    <div class="time">11:15 AM</div>
+                    <div class="activity">🎬 IMAX Visit (check times in advance)</div>
+                </div>
+                <div class="time-slot activities">
+                    <div class="time">12:00-3:00</div>
+                    <div class="activity">🎯 Must-See Exhibits Block</div>
+                </div>
+                <div class="time-slot lunch">
+                    <div class="time">3:00 PM</div>
+                    <div class="activity">🍽️ Late Lunch (Museum Cafe or nearby)</div>
+                </div>
+                <div class="time-slot return">
+                    <div class="time">4:30 PM</div>
+                    <div class="activity">🚗 Return to Convention Center</div>
+                </div>
+            </div>
+            
+            <div class="tips-panel">
+                <h3 class="tips-title">💡 Pro Tips</h3>
+                <div class="tip-item"><strong>Flexible:</strong> Times are suggestions - follow the kids' energy!</div>
+                <div class="tip-item"><strong>Check Times:</strong> IMAX & planetarium in advance</div>
+                <div class="tip-item"><strong>Priority:</strong> Butterfly House, Sound, Maker Lab, Waterworks</div>
+                <div class="tip-item"><strong>Big Breakfast:</strong> Museum cafe or Derek's spots nearby (need Uber)</div>
+                <div class="tip-item"><strong>Late Lunch:</strong> Refuel for final activities</div>
+            </div>
+        </div>
+
+        <!-- Detailed Timed Shows -->
+        <div id="shows-section" class="details-grid">
+            <div id="imax-section" class="detail-section imax">
+                <h3 class="section-header">🎬 IMAX Shows</h3>
+                <div class="show-item">
+                    <div class="show-name">T-Rex 3D</div>
+                    <div class="show-time">11:15 AM</div>
+                    <div class="show-note">Perfect for Liam, might scare Mia</div>
+                </div>
+                <div class="show-item">
+                    <div class="show-name">Blue Whales</div>
+                    <div class="show-time">10:30 AM, 1:00 PM</div>
+                </div>
+                <div class="show-item">
+                    <div class="show-name">Deep Sky</div>
+                    <div class="show-time">11:45 AM, 3:30 PM</div>
+                </div>
+                <div class="show-item">
+                    <div class="show-name">Flight of Butterflies</div>
+                    <div class="show-time">10:30 AM (Short)</div>
+                </div>
+            </div>
+            
+            <div class="detail-section laser">
+                <h3 class="section-header">✨ Laser Dome (Free)</h3>
+                <div class="show-item">
+                    <div class="show-name">Laser Jukebox</div>
+                    <div class="show-time">11:45 AM</div>
+                </div>
+                <div class="show-item">
+                    <div class="show-name">Laser Movie Magic</div>
+                    <div class="show-time">1:00 PM</div>
+                </div>
+                <div class="show-item">
+                    <div class="show-name">Laser Taylor Swift</div>
+                    <div class="show-time">2:00 PM</div>
+                </div>
+                <div class="show-item">
+                    <div class="show-name">Laser Daft Punk</div>
+                    <div class="show-time">3:00 PM</div>
+                </div>
+                <div class="show-item">
+                    <div class="show-name">Laser Sci-Fi</div>
+                    <div class="show-time">4:00 PM</div>
+                </div>
+            </div>
+            
+            <div class="detail-section planetarium">
+                <h3 class="section-header">🌟 Planetarium (Free)</h3>
+                <div class="show-item">
+                    <div class="show-name">Moon Adventure</div>
+                    <div class="show-time">10:30 AM, 1:30 PM</div>
+                    <div class="show-note">Preschool-friendly (15-20 min)</div>
+                </div>
+                <div class="show-item">
+                    <div class="show-name">Sky Watch</div>
+                    <div class="show-time">11:15 AM, 2:15 PM, 3:15 PM</div>
+                    <div class="show-note">25-30 minutes</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Exhibits by Location -->
+        <div id="exhibits-section" class="exhibits-section">
+            <h2 class="section-header">🎯 Must-See Exhibits by Location</h2>
+            
+            <div class="building-group building1">
+                <h3 class="building-title">🏢 Building 1</h3>
+                <div class="exhibits-mini-grid">
+                    <div class="exhibit-card">
+                        <div class="exhibit-name">🦴 Dinosaurs</div>
+                        <div class="exhibit-desc">Dino statues & replicas</div>
+                    </div>
+                    <div class="exhibit-card">
+                        <div class="exhibit-name">📋 Information Desk</div>
+                        <div class="exhibit-desc">Guest services & live science stage</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="building-group building2">
+                <h3 class="building-title">🏢 Building 2</h3>
+                <div class="exhibits-mini-grid">
+                    <div class="exhibit-card preschool">
+                        <div class="exhibit-name">🌊 Salt Water Tidepool</div>
+                        <div class="exhibit-desc">Touch sea creatures & stingrays</div>
+                    </div>
+                    <div class="exhibit-card preschool">
+                        <div class="exhibit-name">🧸 Just for Tots</div>
+                        <div class="exhibit-desc">Little playground area</div>
+                    </div>
+                    <div class="exhibit-card">
+                        <div class="exhibit-name">🚀 Destination: Outer Space</div>
+                        <div class="exhibit-desc">Cockpits to climb in & space tools</div>
+                    </div>
+                    <div class="exhibit-card">
+                        <div class="exhibit-name">🌍 Science on a Sphere</div>
+                        <div class="exhibit-desc">Hyper-realistic interactive globe</div>
+                    </div>
+                    <div class="exhibit-card">
+                        <div class="exhibit-name">🧠 Brainy Bodies</div>
+                        <div class="exhibit-desc">Basic interactive body science</div>
+                    </div>
+                    <div class="exhibit-card">
+                        <div class="exhibit-name">🌟 Planetarium</div>
+                        <div class="exhibit-desc">See show times above</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="building-group building3">
+                <h3 class="building-title">🏢 Building 3</h3>
+                <div class="exhibits-mini-grid">
+                    <div class="exhibit-card highlight">
+                        <div class="exhibit-name">🔧 Tinker Tank Makerspace</div>
+                        <div class="exhibit-desc">Perfect for Liam - hands-on building</div>
+                    </div>
+                    <div class="exhibit-card">
+                        <div class="exhibit-name">🎨 Wild Creativity</div>
+                        <div class="exhibit-desc">May end July 5th - check if open</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="building-group ackerley">
+                <h3 class="building-title">🎯 Ackerley Family Gallery</h3>
+                <div class="exhibits-mini-grid">
+                    <div class="exhibit-card highlight">
+                        <div class="exhibit-name">🦋 Tropical Butterfly House</div>
+                        <div class="exhibit-desc">Essential stop - make sure to visit!</div>
+                    </div>
+                    <div class="exhibit-card">
+                        <div class="exhibit-name">⚖️ Physics Playground</div>
+                        <div class="exhibit-desc">Hands-on physics experiments</div>
+                    </div>
+                    <div class="exhibit-card">
+                        <div class="exhibit-name">💻 Tech Experience Lab</div>
+                        <div class="exhibit-desc">Technology interactions</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="building-group courtyard">
+                <h3 class="building-title">🌳 Outdoor Areas</h3>
+                <div class="exhibits-mini-grid">
+                    <div class="exhibit-card highlight">
+                        <div class="exhibit-name">💦 Waterworks</div>
+                        <div class="exhibit-desc">Water cannons - Liam will love this!</div>
+                    </div>
+                    <div class="exhibit-card">
+                        <div class="exhibit-name">🌿 Pollinator Path</div>
+                        <div class="exhibit-desc">Native plants & animals path</div>
+                    </div>
+                    <div class="exhibit-card highlight">
+                        <div class="exhibit-name">🎵 Adventures with Sound</div>
+                        <div class="exhibit-desc">Likely the best - 13 interactive features</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="important-note">
+            ⚠️ Critical: Return to Convention Center by 4:30-4:45 PM for good seats!
+        </div>
+
+        <!-- Museum Map -->
+        <div id="map-section" class="map-section">
+            <h2 class="map-title">🗺️ Museum Layout Map</h2>
+            
+            <div style="margin-bottom: 15px;">
+                <img src="museum-map.jpg" style="max-width: 100%; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);" alt="Pacific Science Museum Floor Plan and Directory">
+            </div>
+            
+            <div style="font-size: 0.9em; color: #666; margin-top: 15px; background: #f8f9ff; padding: 10px; border-radius: 6px;">
+                <strong>💡 Usage:</strong> Name your map image file <code>museum-map.jpg</code> and upload it to the same folder as this HTML file
+            </div>
+        </div>
+
+        <!-- Rubik's Schedule -->
+        <div id="rubiks-section" class="rubiks-section">
+            <h2 class="rubiks-title">🧩 Saturday Rubik's Competition Finals</h2>
+            <div class="rubiks-grid">
+                <div class="rubiks-event">
+                    <div class="event-name">4x4x4 Cube Final</div>
+                    <div class="event-time">5:25 PM</div>
+                </div>
+                <div class="rubiks-event">
+                    <div class="event-name">Megaminx Final</div>
+                    <div class="event-time">5:50 PM</div>
+                </div>
+                <div class="rubiks-event">
+                    <div class="event-name">2x2x2 Cube Final</div>
+                    <div class="event-time">6:15 PM</div>
+                </div>
+                <div class="rubiks-event">
+                    <div class="event-name">7x7x7 Cube Final</div>
+                    <div class="event-time">6:40 PM</div>
+                </div>
+            </div>
+            <div style="text-align: center; margin-top: 15px; font-size: 0.9em; opacity: 0.9;">
+                Second rounds start at 11:25 AM - check schedule for complete timing
+            </div>
+        </div>
+    </div>
+</body>
+</html>
